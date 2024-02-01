@@ -24,3 +24,5 @@ Route::get('testimonials', [CarController::class, 'testimonials'])->name('testim
 Route::get('blog', [CarController::class, 'blog'])->name('blog');
 Route::get('about', [CarController::class, 'about'])->name('about');
 Route::get('contact', [CarController::class, 'contact'])->name('contactUs');
+
+
