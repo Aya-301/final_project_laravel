@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CarController;
+use App\Http\Controllers\RentalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', [CarController::class, 'home'])->name('index');
-Route::get('list', [CarController::class, 'list'])->name('carList');
-Route::get('testimonials', [CarController::class, 'testimonials'])->name('testimonials');
-Route::get('blog', [CarController::class, 'blog'])->name('blog');
-Route::get('about', [CarController::class, 'about'])->name('about');
-Route::get('contact', [CarController::class, 'contact'])->name('contactUs');
+Route::get('home', [RentalController::class, 'home'])->name('index');
+Route::get('list', [RentalController::class, 'list'])->name('carList');
+Route::get('testimonials', [RentalController::class, 'testimonials'])->name('testimonials');
+Route::get('blog', [RentalController::class, 'blog'])->name('blog');
+Route::get('about', [RentalController::class, 'about'])->name('about');
+Route::get('contact', [RentalController::class, 'contact'])->name('contactUs');
 
 

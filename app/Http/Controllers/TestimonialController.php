@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Testimonial;
+use App\Traits\Common;
 
-class CarController extends Controller
+class TestimonialController extends Controller
 {
+    use common;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $testimonials = Testimonial::get();
+        return view ('admin.testimonials', compact ('testimonials'));
     }
 
     /**

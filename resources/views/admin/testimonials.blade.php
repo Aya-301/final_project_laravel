@@ -96,5 +96,5 @@
 @endsection
 
 @section('title')
-Edit Testimonial
+Testimonials List
 @endsection
