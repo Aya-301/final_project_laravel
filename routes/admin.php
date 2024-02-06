@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MessageController;
 
 Route::prefix('admin')->group(function () {
 
@@ -31,7 +32,13 @@ Route::prefix('admin')->group(function () {
     Route::get('editCategory/{id}',[CategoryController::class,'edit'])->name('editCategory');
     Route::put('updateCategory/{id}',[CategoryController::class,'update'])->name('updateCategory');
     Route::get('deleteCategory/{id}',[CategoryController::class,'destroy']);
-
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //messages
+    Route::get('contactUs',[MessageController::class,'create'])->name('contactUs');
+    Route::post('insertmessage',[MessageController::class,'store'])->name('insertmessage');
+    Route::get('messages',[MessageController::class,'index'])->name('messages');
+    Route::get('showMessage/{id}',[MessageController::class,'show'])->name('showMessage');
+    Route::get('deleteMessage/{id}',[MessageController::class,'destroy']);
 
 
 });

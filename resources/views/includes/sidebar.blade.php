@@ -29,7 +29,7 @@
 								</li>
                 <li><a><i class="fa fa-desktop"></i> Messages <span class="fa fa-chevron-down {{ (request()->routeIs('messages') ) ? 'active' : '' }}"></span></a>
 									<ul class="nav child_menu">
-										{{-- <li><a href="{{route('messages')}}">Messages</a></li> --}}
+										<li><a href="{{route('messages')}}">Messages</a></li>
 									</ul>
 								</li>
 							</ul>

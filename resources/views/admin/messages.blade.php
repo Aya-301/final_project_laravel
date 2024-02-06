@@ -57,25 +57,14 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($messages as $message)
                         <tr>
-                          <td>First Name and Last Name</td>
-                          <td>mail@example.com</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
-                          <td><img src="{{asset('admin/images/delete.png')}}" alt="Delete"></td>
+                          <td>{{$message->fname}} {{$message->lname}}</td>
+                          <td>{{$message->email}}</td>
+                          <td><a href="showMessage/{{ $message->id }}"> <img src="{{asset('admin/images/edit.png')}}" alt="Edit"> </a></td>
+                          <td><a href="deleteMessage/{{ $message->id }}" onclick="return confirm('Are you sure you want to delete?')"> <img src="{{asset('admin/images/delete.png')}}" alt="Delete"> </a></td>
                         </tr>
-                        <tr>
-                          <td>First Name and Last Name</td>
-                          <td>mail@example.com</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
-                          <td><img src="{{asset('admin/images/delete.png')}}" alt="Delete"></td>
-                        </tr>
-                        <tr>
-                          <td>First Name and Last Name</td>
-                          <td>mail@example.com</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
-                          <td><img src="{{asset('admin/images/delete.png')}}" alt="Delete"></td>
-                        </tr>
-                        
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
