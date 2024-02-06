@@ -23,7 +23,7 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.addTestimonial');
     }
 
     /**
@@ -31,7 +31,18 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = $this->message();
+        $data= $request->validate([
+            'name'=>'required|string|max:50',
+            'position'=>'required|string', 
+            'content' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg|max:3048',
+        ],$message);
+        $fileName = $this->uploadFile($request->image, 'assets/img');    
+        $data['image'] = $fileName;
+        $data['published'] = isset($request-> published);
+        Testimonial::create ($data);
+        return redirect('admin/admintestimonials');
     }
 
     /**
@@ -39,7 +50,8 @@ class TestimonialController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $testimonials = Testimonial::findOrFail($id);
+        return view('admin.showTestimonial', compact('testimonials'));
     }
 
     /**
@@ -47,7 +59,8 @@ class TestimonialController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $testimonials = Testimonial::findOrFail($id);
+        return view('admin.editTestimonial', compact('testimonials'));
     }
 
     /**
@@ -55,7 +68,23 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $message = $this->message();
+        $data= $request->validate([
+            'name'=>'required|string|max:50',
+            'position'=>'required|string',
+            'content' => 'required',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:3048'
+            
+        ],$message);
+
+        if($request->hasFile('image')){
+            $fileName = $this->uploadFile($request->image, 'assets/img');    
+            $data['image'] = $fileName;
+            unlink('assets/img/'. $request->oldImage);
+        }
+        $data['published'] = isset($request-> published);
+        Testimonial::where('id', $id)->update ($data);
+        return redirect('admin/admintestimonials');
     }
 
     /**
@@ -63,6 +92,19 @@ class TestimonialController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Testimonial::where('id', $id)->forceDelete();
+        return redirect('admin/admintestimonials');
+    }
+
+    public function message(){
+        return[
+            'name.required'=>' This field is required ',
+            'position.required'=>'This field is required',
+            'content.required'=>' This field is required',
+            'image.required'=>' You Should choose a file',
+            'image.mimes'=> 'Incorrect image type',
+            'image.max'=> 'Max file size exceeded',
+            
+        ];
     }
 }

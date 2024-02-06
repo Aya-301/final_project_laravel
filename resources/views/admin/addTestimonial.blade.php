@@ -45,34 +45,44 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+									<form action="{{route('insert')}}" method="post" enctype="multipart/form-data" >
+										@csrf
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Name <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="name" required="required" class="form-control ">
+												<input type="text" id="name" required="required" class="form-control" name="name" value="{{old('name')}}">
 											</div>
+											@error('name')
+											<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
                                         <div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Position <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="position">Position <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="position" required="required" class="form-control ">
+												<input type="text" id="position" required="required" class="form-control " name="position" value="{{old('position')}}">
 											</div>
+											@error('position')
+											<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="content">Content <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<textarea id="content" name="content" required="required" class="form-control">Contents</textarea>
+												<textarea id="content" name="content" required="required" class="form-control" name="content">{{old('content')}}</textarea>
 											</div>
+											@error('content')
+											<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 										
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Published</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat">
+													<input type="checkbox" name="published" value="1" {{ old('published') ? 'checked' : '' }} class="flat">
 												</label>
 											</div>
 										</div>
@@ -82,6 +92,9 @@
 											<div class="col-md-6 col-sm-6 ">
 												<input type="file" id="image" name="image" required="required" class="form-control">
 											</div>
+											@error('image')
+											<div class="alert alert-danger">{{ $message }}</div>
+											@enderror
 										</div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">

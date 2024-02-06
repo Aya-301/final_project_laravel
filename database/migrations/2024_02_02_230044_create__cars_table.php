@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('price');
             $table->boolean('active');
             $table->string('image', 100);
+            $table->foreignId('category_id')->constrained('_categories');
             $table->timestamps();
         });
     }

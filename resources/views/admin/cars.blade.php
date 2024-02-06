@@ -60,28 +60,21 @@
 
 
                       <tbody>
+                        @foreach($cars as $car)
                         <tr>
-                          <td>Car 10</td>
-                          <td>250</td>
-                          <td>Yes</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
-                          <td><img src="{{asset('admin/images/delete.png')}}" alt="Delete"></td>
+                          <td>{{$car->title}}</td>
+                          <td>{{$car->price}}</td>
+                          <td>
+                            @if ($car->active)
+                            yes
+                            @else
+                            no
+                            @endif
+                          </td>
+                          <td><a href="editCar/{{ $car->id }}" > <img src="{{asset('admin/images/edit.png')}}" alt="Edit"> </a></td>
+                          <td><a href="deleteCar/{{ $car->id }}" onclick="return confirm('Are you sure you want to delete?')" > <img src="{{asset('admin/images/delete.png')}}" alt="Delete"> </a></td>
                         </tr>
-                        <tr>
-                          <td>Car 1</td>
-                          <td>150</td>
-                          <td>Yes</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
-                          <td><img src="{{asset('admin/images/delete.png')}}" alt="Delete"></td>
-                        </tr>
-                        <tr>
-                          <td>Car 2</td>
-                          <td>200</td>
-                          <td>Yes</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
-                          <td><img src="{{asset('admin/images/delete.png')}}" alt="Delete"></td>
-                        </tr>
-                        
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
