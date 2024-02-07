@@ -39,6 +39,9 @@ Route::prefix('admin')->group(function () {
     Route::get('messages',[MessageController::class,'index'])->name('messages');
     Route::get('showMessage/{id}',[MessageController::class,'show'])->name('showMessage');
     Route::get('deleteMessage/{id}',[MessageController::class,'destroy']);
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //users
+    
 
 
 });

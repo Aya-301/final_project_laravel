@@ -26,3 +26,7 @@ Route::get('about', [RentalController::class, 'about'])->name('about');
 Route::get('contact', [RentalController::class, 'contact'])->name('contactUs');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

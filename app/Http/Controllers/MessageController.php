@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Message;
 use App\Mail\email;
 use Mail;
@@ -15,7 +16,9 @@ class MessageController extends Controller
     public function index()
     {
         $messages = Message::get();
-        return view ('admin.messages', compact ('messages'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view ('admin.messages', compact ('messages', 'unreadMessages' ));
+        
     }
 
     /**
@@ -39,9 +42,11 @@ class MessageController extends Controller
             'message' => 'required|string',
         ],$message);
         Message::create ($data);
+        $unreadMessageCount = Message::where('read_at', false)->count();
+        Session::put('unreadMessageCount', $unreadMessageCount);
         Mail::to('yoya@email.com')->send(
             new email($data));
-        return redirect('admin/messages');
+        return redirect('admin/messages')->with('success', 'Message sent successfully!');
     }
 
     /**
@@ -50,8 +55,13 @@ class MessageController extends Controller
     public function show(string $id)
     {
         $messages = Message::findOrFail($id);
-        $messages->update(['read_at'=>1]);
-        return view('admin/showMessage', compact('messages'));
+        $messages->update(['read_at' => true]);
+        
+        $unreadMessages = Message::where('read_at', false)->get();
+        $unreadMessageCount = Message::where('read_at', false)->count();
+        session()->flash('message', 'Message marked as read.');
+        session()->flash('unreadMessageCount', $unreadMessageCount);
+        return view('admin/showMessage', compact('messages', 'unreadMessages'));
     }
 
     /**

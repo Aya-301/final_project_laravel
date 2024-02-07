@@ -24,65 +24,33 @@
                   <li role="presentation" class="nav-item dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-envelope-o"></i>
-                      <span class="badge bg-green">6</span>
+                      <span id="" class="badge bg-green">{{ session('unreadMessageCount') }}</span>
                     </a>
                     <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                      @foreach($unreadMessages as $message)
                       <li class="nav-item">
                         <a class="dropdown-item">
                           <span class="image"><img src="{{asset('admin/images/img.jpg')}}" alt="Profile Image" /></span>
                           <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
+                            <span>{{ $message->fname }} {{ $message->lname }}</span>
+                            <span class="time">{{ $message->created_at->diffForHumans() }}</span>
                           </span>
                           <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
+                          {{ $message->content }}
                           </span>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="{{asset('admin/images/img.jpg')}}" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="{{asset('admin/images/img.jpg')}}" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="{{asset('admin/images/img.jpg')}}" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
+                      @endforeach
+                      @if($unreadMessages->isEmpty())
                       <li class="nav-item">
                         <div class="text-center">
                           <a class="dropdown-item">
-                            <strong>See All Alerts</strong>
+                            <strong>No unread Messages</strong>
                             <i class="fa fa-angle-right"></i>
                           </a>
                         </div>
                       </li>
+                      @endif
                     </ul>
                   </li>
                 </ul>

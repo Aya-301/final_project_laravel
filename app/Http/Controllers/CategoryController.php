@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Message;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories =Category::get();
-        return view('admin.categories', compact('categories'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.categories', compact('categories', 'unreadMessages'));
     }
 
     /**
@@ -21,7 +23,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.addCategory');
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.addCategory' ,compact('unreadMessages'));
     }
 
     /**

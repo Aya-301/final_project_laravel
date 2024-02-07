@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Message;
 use App\Traits\Common;
 
 class CarController extends Controller
@@ -16,7 +17,8 @@ class CarController extends Controller
     public function index()
     {
         $cars= Car::get();
-        return view('admin.cars', compact('cars'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.cars', compact('cars', 'unreadMessages'));
     }
 
     /**
@@ -25,7 +27,8 @@ class CarController extends Controller
     public function create()
     {
         $categories =Category::get();
-        return view('admin.addCar', compact('categories'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.addCar', compact('categories', 'unreadMessages'));
     }
 
     /**

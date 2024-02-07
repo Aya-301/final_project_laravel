@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testimonial;
+use App\Models\Message;
 use App\Traits\Common;
 
 class TestimonialController extends Controller
@@ -15,7 +16,8 @@ class TestimonialController extends Controller
     public function index()
     {
         $testimonials = Testimonial::get();
-        return view ('admin.testimonials', compact ('testimonials'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view ('admin.testimonials', compact ('testimonials', 'unreadMessages'));
     }
 
     /**
@@ -23,7 +25,8 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        return view('admin.addTestimonial');
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.addTestimonial', compact('unreadMessages'));
     }
 
     /**
