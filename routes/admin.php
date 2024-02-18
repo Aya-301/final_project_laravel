@@ -16,7 +16,6 @@ Route::prefix('admin')->group(function () {
     Route::get('addtest',[TestimonialController::class,'create'])->name('addtest');
     Route::post('insert',[TestimonialController::class,'store'])->name('insert');
     Route::get('admintestimonials',[TestimonialController::class,'index'])->name('admintestimonials');
-    Route::get('showTestimoninals/{id}',[TestimonialController::class,'show'])->name('showTestimoninal');
     Route::get('editTestimoninal/{id}',[TestimonialController::class,'edit'])->name('editTestimoninal');
     Route::put('updateTestimoninal/{id}',[TestimonialController::class,'update'])->name('updateTestimoninal');
     Route::get('deleteTestimoninal/{id}',[TestimonialController::class,'destroy']);

@@ -47,7 +47,7 @@ class MessageController extends Controller
         Session::put('unreadMessageCount', $unreadMessageCount);
         Mail::to('yoya@email.com')->send(
             new email($data));
-        return redirect('admin/messages')->with('success', 'Message sent successfully!');
+        return redirect('contact')->with('success', 'Message sent successfully!');
     }
 
     /**

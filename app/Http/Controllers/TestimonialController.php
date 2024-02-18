@@ -63,7 +63,8 @@ class TestimonialController extends Controller
     public function edit(string $id)
     {
         $testimonials = Testimonial::findOrFail($id);
-        return view('admin.editTestimonial', compact('testimonials'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.editTestimonial', compact('testimonials', 'unreadMessages'));
     }
 
     /**

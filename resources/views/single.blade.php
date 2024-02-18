@@ -24,7 +24,7 @@
       @include('includes.headerNav')
 
       </header>
-      <div class="hero inner-page" style="background-image: url('images/hero_1_a.jpg');">
+      <div class="hero inner-page" style="background-image: url('{{asset('assets/images/hero_1_a.jpg')}}');">
         
         <div class="container">
           <div class="row align-items-end ">
@@ -32,7 +32,9 @@
 
               <div class="intro">
                 <h1><strong>Single Blog Posts Title</strong></h1>
-                <div class="pb-4"><strong class="text-black">Posted on May 22, 2020</strong></div>
+                <div class="pb-4"><strong class="text-black">Posted on @if($cars->created_at)
+                                    {{ \Carbon\Carbon::parse($cars->created_at)->format('F j, Y') }}
+                                @endif</strong></div>
               </div>
 
             </div>
@@ -46,7 +48,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 blog-content">
-            <img src="images/car_2.jpg" alt="" class="img-fluid p-3 mb-5 bg-white rounded">
+            <img src="{{ asset('assets/img/'.$cars->image) }}" alt="" class="img-fluid p-3 mb-5 bg-white rounded">
             
             <div class="grey-bg container-fluid">
               <section id="minimal-statistics">
@@ -66,7 +68,7 @@
                               <i class="icon-pencil primary font-large-2 float-left"></i>
                             </div>
                             <div class="media-body text-right">
-                              <h3>4</h3>
+                              <h3>{{$cars->doors}}</h3>
                               <span>Doors</span>
                             </div>
                           </div>
@@ -83,8 +85,8 @@
                               <i class="icon-speech warning font-large-2 float-left"></i>
                             </div>
                             <div class="media-body text-right">
-                              <h3>4</h3>
-                              <span>Laggage</span>
+                              <h3>{{$cars->luggage}}</h3>
+                              <span>Luggage</span>
                             </div>
                           </div>
                         </div>
@@ -100,7 +102,7 @@
                               <i class="icon-graph success font-large-2 float-left"></i>
                             </div>
                             <div class="media-body text-right">
-                              <h3>64.89 $</h3>
+                              <h3>{{$cars->price}} $</h3>
                               <span>Price</span>
                             </div>
                           </div>
@@ -131,7 +133,7 @@
 
 
             <div class="pt-5">
-              <p>Category:  <a href="#">Design</a></p>
+              <p>Category:  <a href="#">{{$cars->category->cat_name}}</a></p>
             </div>
 
 
@@ -140,7 +142,7 @@
               <ul class="comment-list">
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/person_2.jpg" alt="Free Website Template by Free-Template.co">
+                    <img src="{{asset('assets/images/person_2.jpg')}}" alt="Free Website Template by Free-Template.co">
                   </div>
                   <div class="comment-body">
                     <h3>Jacob Smith</h3>
@@ -152,7 +154,7 @@
 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/person_3.jpg" alt="Free Website Template by Free-Template.co">
+                    <img src="{{asset('assets/images/person_3.jpg')}}" alt="Free Website Template by Free-Template.co">
                   </div>
                   <div class="comment-body">
                     <h3>Chris Meyer</h3>
@@ -164,7 +166,7 @@
                   <ul class="children">
                     <li class="comment">
                       <div class="vcard bio">
-                        <img src="images/person_5.jpg" alt="Free Website Template by Free-Template.co">
+                        <img src="{{asset('assets/images/person_5.jpg')}}" alt="Free Website Template by Free-Template.co">
                       </div>
                       <div class="comment-body">
                         <h3>Chintan Patel</h3>
@@ -177,7 +179,7 @@
                       <ul class="children">
                         <li class="comment">
                           <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co">
+                            <img src="{{asset('assets/images/person_1.jpg')}}" alt="Free Website Template by Free-Template.co">
                           </div>
                           <div class="comment-body">
                             <h3>Jean Doe</h3>
@@ -189,7 +191,7 @@
                             <ul class="children">
                               <li class="comment">
                                 <div class="vcard bio">
-                                  <img src="images/person_4.jpg" alt="Free Website Template by Free-Template.co">
+                                  <img src="{{asset('assets/images/person_4.jpg')}}" alt="Free Website Template by Free-Template.co">
                                 </div>
                                 <div class="comment-body">
                                   <h3>Ben Afflick</h3>
@@ -207,7 +209,7 @@
 
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co">
+                    <img src="{{asset('assets/images/person_1.jpg')}}" alt="Free Website Template by Free-Template.co">
                   </div>
                   <div class="comment-body">
                     <h3>Jean Doe</h3>
@@ -260,15 +262,13 @@
             <div class="sidebar-box">
               <div class="categories">
                 <h3>Categories</h3>
-                <li><a href="#">Creatives <span>(12)</span></a></li>
-                <li><a href="#">News <span>(22)</span></a></li>
-                <li><a href="#">Design <span>(37)</span></a></li>
-                <li><a href="#">HTML <span>(42)</span></a></li>
-                <li><a href="#">Web Development <span>(14)</span></a></li>
+                @foreach($categories as $category)
+                <li><a href="#">{{$category->cat_name}} <span>({{$category->cars ? $category->cars->count() : 0}})</span></a></li>
+                @endforeach
               </div>
             </div>
             <div class="sidebar-box">
-              <img src="images/person_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid mb-4 w-50 rounded-circle">
+              <img src="{{asset('assets/images/person_1.jpg')}}" alt="Free Website Template by Free-Template.co" class="img-fluid mb-4 w-50 rounded-circle">
               <h3 class="text-black">About The Author</h3>
               <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
               <p><a href="#" class="btn btn-primary btn-md text-white">Read More</a></p>

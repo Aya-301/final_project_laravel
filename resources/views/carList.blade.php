@@ -17,7 +17,7 @@
 
             <div class="listing d-block  align-items-stretch">
               <div class="listing-img h-100 mr-4">
-                <img src="{{ asset('assets/img/'.$car->image) }}" style="width: 400px; lenth: 200px;" alt="Image" class="img-fluid">
+                <img src="{{ asset('assets/img/'.$car->image) }}" alt="Image" class="img-fluid">
               </div>
               <div class="listing-contents h-100">
                 <h3>{{$car->name}}</h3>
@@ -40,7 +40,7 @@
                 </div>
                 <div>
                   <p>{{$car->content}}</p>
-                  <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                  <p><a href="{{route('single', $car->id)}}" class="btn btn-primary btn-sm">Rent Now</a></p>
                 </div>
               </div>
             </div>
@@ -50,11 +50,17 @@
         <div class="row">
           <div class="col-5">
             <div class="custom-pagination">
-              <a href="#">1</a>
-              <span>2</span>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">5</a>
+            @if ($cars->currentPage() > 1)
+        <a href="{{ $cars->previousPageUrl() }}" class="pagination-link">&laquo;</a>
+            @endif
+
+            @for ($i = 1; $i <= $cars->lastPage(); $i++)
+        <a href="{{ $cars->url($i) }}" class="pagination-link{{ $i == $cars->currentPage() ? ' active' : '' }}">{{ $i }}</a>
+            @endfor
+
+            @if ($cars->hasMorePages())
+        <a href="{{ $cars->nextPageUrl() }}" class="pagination-link">&raquo;</a>
+            @endif
             </div>
           </div>
         </div>

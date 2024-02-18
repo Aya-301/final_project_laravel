@@ -2,6 +2,12 @@
 
 @section('content')
 
+@if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
 <div class="site-section bg-light" id="contact-section">
       <div class="container">
         <div class="row justify-content-center text-center">
@@ -68,7 +74,8 @@
         </div>
       </div>
     </div>
-
+    <div class="container">
+    
 @endsection
 
 @section('s')

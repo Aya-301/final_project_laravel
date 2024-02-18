@@ -24,7 +24,7 @@ Route::get('testimonials', [RentalController::class, 'testimonials'])->name('tes
 Route::get('blog', [RentalController::class, 'blog'])->name('blog');
 Route::get('about', [RentalController::class, 'about'])->name('about');
 Route::get('contact', [RentalController::class, 'contact'])->name('contactUs');
-Route::get('single', [RentalController::class, 'single'])->name('single');
+Route::get('single/{id}', [RentalController::class, 'single'])->name('single');
 
 Auth::routes(['verify'=>true]);
     Route::get('login', [LoginController::class, 'showLoginForm']);
