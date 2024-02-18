@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Message;
+use App\Models\Car;
 
 class CategoryController extends Controller
 {
@@ -53,7 +54,8 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $categories= Category::findOrFail($id);
-        return view('admin.editCategory', compact('categories'));
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('admin.editCategory', compact('categories', 'unreadMessages'));
     }
 
     /**
@@ -73,7 +75,17 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        Category::where('id', $id)->forceDelete();
-        return redirect('admin/categories');
+        // Check if the category has associated cars
+        $categories = Category::findOrFail($id);
+        $carsCount = Car::where('category_id', $categories->id)->count();
+
+        if ($carsCount > 0) {
+            return redirect('admin/categories')->with('error', 'Cannot delete category as it contains cars.');
+        }
+
+        // If no cars associated, delete the category
+        $categories->forceDelete();
+        return redirect('admin/categories')->with('success', 'Category deleted successfully.');
     }
+    
 }

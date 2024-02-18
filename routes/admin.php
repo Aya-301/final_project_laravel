@@ -5,6 +5,10 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\Auth\VerificationController;
 
 Route::prefix('admin')->group(function () {
 
@@ -41,7 +45,20 @@ Route::prefix('admin')->group(function () {
     Route::get('deleteMessage/{id}',[MessageController::class,'destroy']);
     ////////////////////////////////////////////////////////////////////////////////////////////
     //users
+    Route::get('addUser',[UserController::class,'create'])->name('addUser');
+    Route::post('insertUser',[UserController::class,'store'])->name('insertUser');
+    Route::get('users',[UserController::class,'index'])->name('users');
+    Route::get('editUser/{id}',[UserController::class,'edit'])->name('editUser');
+    Route::put('updateUser/{id}',[UserController::class,'update'])->name('updateUser');
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //registration
     
+    Route::get('register', [RegisterController::class, 'showRegistrationForm']);
+    Route::post('register', [RegisterController::class, 'register'])->name('register');
+    Route::get('login', [LoginController::class, 'showLoginForm']);
+    Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::get('verify', [VerificationController::class, 'verifyform']);
+    Route::get('admin/email/verify/{verification_token}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 
 });

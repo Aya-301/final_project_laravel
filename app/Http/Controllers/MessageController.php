@@ -17,7 +17,7 @@ class MessageController extends Controller
     {
         $messages = Message::get();
         $unreadMessages = Message::where('read_at', false)->get();
-        return view ('admin.messages', compact ('messages', 'unreadMessages' ));
+        return view ('admin.messages', compact ('messages', 'unreadMessages'));
         
     }
 
@@ -26,7 +26,8 @@ class MessageController extends Controller
      */
     public function create()
     {
-        return view('contactUs');
+        $unreadMessages = Message::where('read_at', false)->get();
+        return view('contactUs', compact('unreadMessages'));
     }
 
     /**

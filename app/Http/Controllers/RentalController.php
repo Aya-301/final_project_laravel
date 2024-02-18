@@ -21,7 +21,8 @@ class RentalController extends Controller
     public function list ()
     {
         $cars = Car::get();
-        return view('carList', compact('cars'));
+        $testimonials = Testimonial::get();
+        return view('carList', compact('cars', 'testimonials'));
     }
     //testimonials
     public function testimonials ()
@@ -33,6 +34,11 @@ class RentalController extends Controller
     public function blog ()
     {
         return view('blog');
+    }
+    //single
+    public function single ()
+    {
+        return view('single');
     }
     //about
     public function about ()

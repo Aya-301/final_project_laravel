@@ -16,7 +16,7 @@ use App\Http\Controllers\RentalController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('verified');
 
 Route::get('home', [RentalController::class, 'home'])->name('index');
 Route::get('list', [RentalController::class, 'list'])->name('carList');
@@ -24,9 +24,9 @@ Route::get('testimonials', [RentalController::class, 'testimonials'])->name('tes
 Route::get('blog', [RentalController::class, 'blog'])->name('blog');
 Route::get('about', [RentalController::class, 'about'])->name('about');
 Route::get('contact', [RentalController::class, 'contact'])->name('contactUs');
+Route::get('single', [RentalController::class, 'single'])->name('single');
 
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['verify'=>true]);
+    Route::get('login', [LoginController::class, 'showLoginForm']);
+//Auth::routes();
+//Route::get('/home1', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

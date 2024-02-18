@@ -28,7 +28,7 @@ class CarController extends Controller
     {
         $categories =Category::get();
         $unreadMessages = Message::where('read_at', false)->get();
-        return view('admin.addCar', compact('categories', 'unreadMessages'));
+        return view('admin.addCar', compact('categories','unreadMessages'));
     }
 
     /**
@@ -39,7 +39,7 @@ class CarController extends Controller
         $message = $this->message();
         $data= $request->validate([
             'title'=>'required|string|max:50',
-            'content' => 'required', 
+            'content' => 'required|string|max:100', 
             'luggage'=>'required', 
             'doors'=>'required', 
             'passengers'=>'required', 
@@ -68,8 +68,9 @@ class CarController extends Controller
     public function edit(string $id)
     {
         $categories = Category::get();
+        $unreadMessages = Message::where('read_at', false)->get();
         $cars= Car::findOrFail($id);
-        return view('admin.editCar', compact('cars', 'categories'));
+        return view('admin.editCar', compact('cars', 'categories', 'unreadMessages'));
     }
 
     /**
@@ -80,7 +81,7 @@ class CarController extends Controller
         $message = $this->message();
         $data= $request->validate([
             'title'=>'required|string|max:50',
-            'content' => 'required', 
+            'content' => 'required|string|max:100', 
             'luggage'=>'required', 
             'doors'=>'required', 
             'passengers'=>'required', 
@@ -111,6 +112,7 @@ class CarController extends Controller
             'title.required'=>' This field is required ',
             'luggage.required'=>'This field is required',
             'content.required'=>' This field is required',
+            'content.max'=>' You reached maximum numbers of letters',
             'doors.required'=>' This field is required',
             'passengers.required'=>' This field is required',
             'price.required'=>' This field is required',

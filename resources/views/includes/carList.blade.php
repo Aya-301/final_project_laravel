@@ -13,7 +13,7 @@
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="listing d-block  align-items-stretch">              
               <div class="listing-img h-100 mr-4">                
-                <img src="{{ asset('assets/img/'.$car->image) }}" style="width: 600px; lenth: 200px;" alt="Image" class="img-fluid">
+                <img src="{{ asset('assets/img/'.$car->image) }}" style="width: 400px; lenth: 200px;" alt="Image" class="img-fluid">
               </div>
               <div class="listing-contents h-100">
                 <h3>{{$car->name}}</h3>
@@ -45,3 +45,6 @@
         </div>
       </div>
     </div>
+</div>
+
+    

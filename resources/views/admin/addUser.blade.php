@@ -45,33 +45,48 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+									<form action="{{route('insertUser')}}" method="post" >
+										@csrf
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Full Name <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="fullName">Full Name <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" required="required" class="form-control ">
+												<input type="text" id="fullName" required="required" class="form-control " name="fullName" value="{{old('fullName')}}">
 											</div>
+											@error('fullName')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
 										</div>
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="user-name">Username <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="userName">Username <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="user-name" name="user-name" required="required" class="form-control">
+												<input type="text" id="userName" name="userName" required="required" class="form-control" value="{{old('userName')}}">
 											</div>
+											@error('userName')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
 										</div>
 										<div class="item form-group">
 											<label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6 ">
-												<input id="email" class="form-control" type="email" name="email" required="required">
+												<input id="email" class="form-control" type="email" name="email" required="required" value="{{old('email')}}">
 											</div>
+											@error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
 										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
 											<div class="checkbox">
 												<label>
-													<input type="checkbox" class="flat">
+													<input type="checkbox" class="flat" name="active" value="1" {{ old('active') ? 'checked' : '' }}>
 												</label>
 											</div>
 										</div>
@@ -79,8 +94,13 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="password" id="password" name="password" required="required" class="form-control">
+												<input type="password" id="password" name="password" required="required" class="form-control" value="{{old('password')}}">
 											</div>
+											@error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
 										</div>
 										<div class="ln_solid"></div>
 										<div class="item form-group">

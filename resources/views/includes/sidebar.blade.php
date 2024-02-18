@@ -5,8 +5,8 @@
 							<ul class="nav side-menu">
 								<li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down {{ (request()->routeIs('usrs') || request()->routeIs('addUser') ) ? 'active' : '' }}"></span></a>
 									<ul class="nav child_menu">
-										{{-- <li><a href="{{route('users')}}">Users List</a></li> --}}
-										{{-- <li><a href="{{route('addUser')}}">Add User</a></li> --}}
+										<li><a href="{{route('users')}}">Users List</a></li>
+										<li><a href="{{route('addUser')}}">Add User</a></li>
 									</ul>
 								</li>
 								<li><a><i class="fa fa-edit"></i> Categories <span class="fa fa-chevron-down {{ (request()->routeIs('addCategory') || request()->routeIs('categories') ) ? 'active' : '' }}"></span></a>

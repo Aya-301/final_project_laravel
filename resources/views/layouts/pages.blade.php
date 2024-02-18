@@ -30,7 +30,6 @@
 
       @yield('content')
 
-      
       @include('includes.waitingFor')
 
       <footer class="site-footer">

@@ -61,14 +61,23 @@
 
 
                       <tbody>
-                        <tr>
-                          <td>1 Jan 2023</td>
-                          <td>Tony Adam</td>
-                          <td>tony2023</td>
-                          <td>tony@gmail.com</td>
-                          <td>Yes</td>
-                          <td><img src="{{asset('admin/images/edit.png')}}" alt="Edit"></td>
+
+                      @foreach($users as $user)
+                          <tr>
+                          <td>  @if($user->email_verified_at)
+                                    {{ \Carbon\Carbon::parse($user->email_verified_at)->format('j M Y, h:i A') }}
+                                @endif</td>
+                          <td>{{$user->fullName}}</td>
+                          <td>{{$user->userName}}</td>
+                          <td>{{$user->email}}</td>
+                          <td>@if($user->active)
+                            yes
+                            @else 
+                            No
+                            @endif </td>
+                          <td><a href="editUser/{{ $user->id }}"> <img src="{{asset('admin/images/edit.png')}}" alt="Edit"> </a></td>
                         </tr>
+                      @endforeach
                       </tbody>
                     </table>
                   </div>

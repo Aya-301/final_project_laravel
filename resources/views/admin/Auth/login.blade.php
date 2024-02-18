@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Rent Car Login</title>
+    <title>Login</title>
 
     <!-- Bootstrap -->
     <link href="{{asset('admin/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -28,18 +28,31 @@
       <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
-        <div class="animate form login_form">
+        
           <section class="login_content">
-            <form>
+            <form method="POST" action="{{ route('login') }}">
+              @csrf
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <label for="userName">{{ __('Username') }}</label>
+                <input type="text" class="form-control @error('userName') is-invalid @enderror" id="userName" placeholder="UserName" required="" name="userName" value="{{ old('userName') }}"  required autocomplete="userName" autofocus />
+                @error('userName')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+              <label for="password">{{ __('Password') }}</label>
+                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required="" name="password" value="{{ old('password') }}"  required autocomplete="password"/>
+                @error('password')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
+              <button type="submit"> {{ __('Login') }} </button>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
@@ -47,7 +60,7 @@
 
               <div class="separator">
                 <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
+                  <a href="{{route('register')}}" class="to_register"> Create Account </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -60,4 +73,3 @@
               </div>
             </form>
           </section>
-        </div>
