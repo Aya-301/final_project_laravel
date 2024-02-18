@@ -23,7 +23,7 @@ class RentalController extends Controller
     public function list ()
     {
         $cars = Car::paginate(6);
-        $testimonials = Testimonial::get();
+        $testimonials = Testimonial::latest()->take(3)->get();
         return view('carList', compact('cars', 'testimonials'));
     }
     //testimonials
