@@ -27,6 +27,11 @@ Route::get('contact', [RentalController::class, 'contact'])->name('contactUs');
 Route::get('single/{id}', [RentalController::class, 'single'])->name('single');
 
 Auth::routes(['verify'=>true]);
+    Route::get('register', [RegisterController::class, 'showRegistrationForm']);
+    Route::post('register', [RegisterController::class, 'register'])->name('register');
     Route::get('login', [LoginController::class, 'showLoginForm']);
+    Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::get('verify', [VerificationController::class, 'verifyform']);
+    Route::get('admin/email/verify/{verification_token}', [VerificationController::class, 'verify'])->name('verification.verify');
 //Auth::routes();
 //Route::get('/home1', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
